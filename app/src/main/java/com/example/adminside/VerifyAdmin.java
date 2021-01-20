@@ -109,6 +109,7 @@ public class VerifyAdmin extends AppCompatActivity {
                     Intent i = new Intent(VerifyAdmin.this,MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
+                    finish();
                 } else {
                     String message = "Something is wrong";
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -121,5 +122,12 @@ public class VerifyAdmin extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(VerifyAdmin.this,AdminLogin.class));
+        finish();
     }
 }

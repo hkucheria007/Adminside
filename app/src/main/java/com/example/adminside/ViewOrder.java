@@ -3,6 +3,7 @@ package com.example.adminside;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -59,5 +60,12 @@ public class ViewOrder extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ViewOrder.this,MainActivity.class));
+        finish();
     }
 }
