@@ -1,13 +1,19 @@
 package com.example.adminside;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -16,11 +22,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class ViewOrder extends AppCompatActivity {
+
+    CardView cardView;
     TextView Apiz1,Apiz2,Ado1,Ado2,Asan1,Asan2,Aqpiz1,Aqpiz2,Aqdo1,Aqdo2,Aqsan1,Aqsan2;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
     String userId;
-    Button ASeeOrder;
+    Button ADelivered;
 
 
     @Override
@@ -45,6 +53,8 @@ public class ViewOrder extends AppCompatActivity {
         Aqsan1=findViewById(R.id.Aqs1);
         Aqsan2=findViewById(R.id.Aqs2);
 
+        ADelivered=findViewById(R.id.Delivered);
+        cardView=findViewById(R.id.AViewOrderCardView);
 
         userId=getIntent().getStringExtra("UserID");
         DocumentReference dr=firestore.collection("Products").document(userId);
@@ -59,6 +69,42 @@ public class ViewOrder extends AppCompatActivity {
                 Aqsan2.setText("x"+value.getString("Sandwitch2"));
             }
         });
+
+
+        ADelivered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userId=getIntent().getStringExtra("UserID");
+                DocumentReference ref=firestore.collection("CustomerDetails").document(userId);
+                ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        DocumentReference reference=firestore.collection("Products").document(userId);
+                        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                cardView.setVisibility(View.GONE);
+                                Intent i=new Intent(ViewOrder.this,MainActivity.class);
+                                startActivity(i);
+                                Toast.makeText(ViewOrder.this, "Delivered", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ViewOrder.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ViewOrder.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
 
     }
 

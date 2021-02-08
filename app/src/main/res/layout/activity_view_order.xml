@@ -6,17 +6,27 @@
         android:layout_height="match_parent"
         tools:context=".ViewOrder">
 
-        <ScrollView
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/AViewOrderCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
-            <RelativeLayout
-                android:id="@+id/RLOrder"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
+    <TextView
                     android:id="@+id/Ap1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -25,7 +35,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"/>
 
-                <TextView
+    <TextView
                     android:id="@+id/Aqp1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,8 +159,36 @@
                     android:textStyle="bold"
                     />
 
-            </RelativeLayout>
-        </ScrollView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/white"
+                android:layout_below="@id/Aqs2"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
 
 
+        <Button
+            android:id="@+id/Delivered"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Delivered"
+            android:layout_centerInParent="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
     </RelativeLayout>
