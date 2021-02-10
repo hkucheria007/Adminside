@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +28,9 @@ public class ViewOrder extends AppCompatActivity {
     TextView Apiz1,Apiz2,Ado1,Ado2,Asan1,Asan2,Aqpiz1,Aqpiz2,Aqdo1,Aqdo2,Aqsan1,Aqsan2;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
-    String userId;
-    Button ADelivered;
+    String userId,quantity="0";
+    ImageView vp1,vp2,vd1,vd2,vs1,vs2;
+    TextView total;
 
 
     @Override
@@ -53,7 +55,14 @@ public class ViewOrder extends AppCompatActivity {
         Aqsan1=findViewById(R.id.Aqs1);
         Aqsan2=findViewById(R.id.Aqs2);
 
-        ADelivered=findViewById(R.id.Delivered);
+        vp1=findViewById(R.id.vegP1);
+        vp2=findViewById(R.id.vegP2);
+        vd1=findViewById(R.id.vegD1);
+        vd2=findViewById(R.id.vegD2);
+        vs1=findViewById(R.id.vegS1);
+        vs2=findViewById(R.id.vegS2);
+
+        total=findViewById(R.id.TotalHeading);
         cardView=findViewById(R.id.AViewOrderCardView);
 
         userId=getIntent().getStringExtra("UserID");
@@ -61,49 +70,62 @@ public class ViewOrder extends AppCompatActivity {
         dr.addSnapshotListener(ViewOrder.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                Aqpiz1.setText("x"+value.getString("Pizza1"));
-                Aqpiz2.setText("x"+value.getString("Pizza2"));
-                Aqdo1.setText("x"+value.getString("Donut1"));
-                Aqdo2.setText("x"+value.getString("Donut2"));
-                Aqsan1.setText("x"+value.getString("Sandwitch1"));
-                Aqsan2.setText("x"+value.getString("Sandwitch2"));
+
+                String p1=value.getString("Pizza1");
+                String p2=value.getString("Pizza2");
+                String d1=value.getString("Donut1");
+                String d2=value.getString("Donut2");
+                String s1=value.getString("Sandwitch1");
+                String s2=value.getString("Sandwitch2");
+                String price=value.getString("Total");
+
+                if (!p1.equals(quantity)){
+                    vp1.setVisibility(View.VISIBLE);
+                    Apiz1.setVisibility(View.VISIBLE);
+                    Aqpiz1.setText(p1);
+                    Aqpiz1.setVisibility(View.VISIBLE);
+                }
+
+                if (!p2.equals(quantity)){
+                    vp2.setVisibility(View.VISIBLE);
+                    Apiz2.setVisibility(View.VISIBLE);
+                    Aqpiz2.setText(p2);
+                    Aqpiz2.setVisibility(View.VISIBLE);
+                }
+
+                 if (!d1.equals(quantity)){
+                    vd1.setVisibility(View.VISIBLE);
+                    Ado1.setVisibility(View.VISIBLE);
+                    Aqdo1.setText(d1);
+                    Aqdo1.setVisibility(View.VISIBLE);
+                }
+
+                 if (!d2.equals(quantity)){
+                    vd2.setVisibility(View.VISIBLE);
+                    Ado2.setVisibility(View.VISIBLE);
+                    Aqdo2.setText(d2);
+                    Aqdo2.setVisibility(View.VISIBLE);
+                }
+
+                 if (!s1.equals(quantity)){
+                     vs1.setVisibility(View.VISIBLE);
+                     Asan1.setVisibility(View.VISIBLE);
+                     Aqsan1.setText(s1);
+                     Aqsan1.setVisibility(View.VISIBLE);
+                 }
+
+                 if (!s2.equals(quantity)){
+                     vs2.setVisibility(View.VISIBLE);
+                     Asan2.setVisibility(View.VISIBLE);
+                     Aqsan2.setText(s2);
+                     Aqsan2.setVisibility(View.VISIBLE);
+                 }
+
+                 total.setText("Grand Total:   "+price);
+
             }
         });
 
-
-        ADelivered.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userId=getIntent().getStringExtra("UserID");
-                DocumentReference ref=firestore.collection("CustomerDetails").document(userId);
-                ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        DocumentReference reference=firestore.collection("Products").document(userId);
-                        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                cardView.setVisibility(View.GONE);
-                                Intent i=new Intent(ViewOrder.this,MainActivity.class);
-                                startActivity(i);
-                                Toast.makeText(ViewOrder.this, "Delivered", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ViewOrder.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ViewOrder.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
 
 
     }

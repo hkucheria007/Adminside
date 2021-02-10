@@ -6,11 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".ViewOrder">
 
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/AViewOrderCardView"
         android:layout_width="match_parent"
@@ -26,34 +21,58 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp">
 
-    <TextView
+                <ImageView
+                android:id="@+id/vegP1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                app:srcCompat="@drawable/veg"
+                    android:visibility="gone"/>
+
+            <TextView
                     android:id="@+id/Ap1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pizza1"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:layout_toRightOf="@id/vegP1"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18dp"
+                android:visibility="gone"/>
 
-    <TextView
+
+                <TextView
                     android:id="@+id/Aqp1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
 
-                <TextView
+
+            <ImageView
+                android:id="@+id/vegP2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/vegP1"
+                app:srcCompat="@drawable/veg"
+                android:visibility="gone"/>
+
+
+            <TextView
                     android:id="@+id/Ap2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pizza2"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_below="@+id/Ap1"
-                    android:layout_marginTop="10sp"
-                    android:textSize="20sp"/>
+                    android:layout_below="@+id/vegP1"
+                android:layout_toRightOf="@id/vegP2"
+                    android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp"
+                    android:textSize="18dp"
+                android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/Aqp2"
@@ -61,22 +80,33 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Aqp1"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vegD1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/vegP2"
+                app:srcCompat="@drawable/veg"
+                android:visibility="gone"/>
 
 
-                <TextView
+            <TextView
                     android:id="@+id/Ad1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Donut1"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_below="@+id/Ap2"
-                    android:layout_marginTop="10sp"
-                    android:textSize="20sp"/>
+                    android:layout_below="@+id/vegP2"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18dp"
+                    android:layout_toRightOf="@id/vegD1"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/Aqd1"
@@ -84,22 +114,34 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Aqp2"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vegD2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/vegD1"
+                app:srcCompat="@drawable/veg"
+                android:visibility="gone"/>
 
 
-                <TextView
+
+            <TextView
                     android:id="@+id/Ad2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Donut2"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_below="@+id/Ad1"
-                    android:layout_marginTop="10sp"
-                    android:textSize="20sp"/>
+                    android:layout_below="@+id/vegD1"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18dp"
+                android:layout_toRightOf="@id/vegD2"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/Aqd2"
@@ -107,10 +149,20 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Aqd1"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vegS1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/vegD2"
+                app:srcCompat="@drawable/veg"
+                android:visibility="gone"/>
+
 
 
                 <TextView
@@ -118,11 +170,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sandwich1"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_below="@+id/Ad2"
-                    android:layout_marginTop="10sp"
-                    android:textSize="20sp"/>
+                    android:layout_below="@+id/vegD2"
+                    android:layout_toRightOf="@id/vegS1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18dp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/Aqs1"
@@ -130,22 +184,34 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Aqd2"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
 
 
-                <TextView
+            <ImageView
+                android:id="@+id/vegS2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/vegS1"
+                app:srcCompat="@drawable/veg"
+                android:visibility="gone"/>
+
+
+            <TextView
                     android:id="@+id/As2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sandwich2"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_below="@+id/As1"
-                    android:layout_marginTop="10sp"
-                    android:textSize="20sp"
+                    android:layout_below="@+id/vegS1"
+                android:layout_toRightOf="@id/vegS2"
+                android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18dp"
+                android:visibility="gone"
                     />
 
                 <TextView
@@ -154,10 +220,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Aqs1"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="18dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
 
             <View
                 android:layout_width="match_parent"
@@ -165,30 +231,19 @@
                 android:background="@color/white"
                 android:layout_below="@id/Aqs2"/>
 
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
+    <TextView
+        android:id="@+id/TotalHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grand Total"
+        android:textColor="@color/black"
+        android:layout_below="@id/AViewOrderCardView"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"/>
 
-
-        <Button
-            android:id="@+id/Delivered"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Delivered"
-            android:layout_centerInParent="true"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            android:layout_alignParentBottom="true"/>
-
-
-    </RelativeLayout>
-    </RelativeLayout>
+        </RelativeLayout>

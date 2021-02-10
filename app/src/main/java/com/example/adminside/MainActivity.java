@@ -14,11 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -71,6 +75,36 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 });
+
+                holder.ADelivered.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String userId=model.getID();
+                DocumentReference ref=firestore.collection("CustomerDetails").document(userId);
+                ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        DocumentReference reference=firestore.collection("Products").document(userId);
+                        reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(MainActivity.this, "Delivered", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                    }
+                });
             }
         };
         recyclerView.setHasFixedSize(true);
@@ -82,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView CName, CAdd, CCity, CMobile;
         CardView cardView;
-        Button Order;
+        Button Order,ADelivered;
 
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             CCity = itemView.findViewById(R.id.CityTV);
             CMobile = itemView.findViewById(R.id.MobileTV);
             Order=itemView.findViewById(R.id.OrderBtn);
+            ADelivered=itemView.findViewById(R.id.Delivered);
         }
     }
 
