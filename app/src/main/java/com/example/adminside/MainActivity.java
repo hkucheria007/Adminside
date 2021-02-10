@@ -61,11 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull ProductsViewHolder holder, int position, @NonNull ProductsModel model) {
-                holder.CName.setText("Name:" + model.getFirstName() + " " + model.getLastName());
-                holder.CAdd.setText("Address:" + model.getAddress1() + "," + model.getAddress2() + "," + model.getAddress3()+","+model.getPincode());
-                holder.CCity.setText("City:" + model.getCity());
-                holder.CMobile.setText("Mobile:" + model.getMobile());
+                holder.CName.setText("Name:  " + model.getFirstName().toUpperCase() + " " + model.getLastName().toUpperCase());
+                holder.CAdd.setText("Address:  " + model.getAddress1() + "," + model.getAddress2() + "," + model.getAddress3()+","+model.getPincode());
+                holder.CCity.setText("City:  " + model.getCity().toUpperCase());
+                holder.CMobile.setText("Mobile:  " + model.getMobile());
 
+                //See Order Button
                 holder.Order.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                //Deliver Button
                 holder.ADelivered.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
